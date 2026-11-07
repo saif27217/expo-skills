@@ -1,0 +1,4 @@
+# temp fetch artifacts during verification
+*.html
+*.txt
+sitemap.xml
