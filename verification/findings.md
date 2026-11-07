@@ -45,3 +45,17 @@ Source docs: `docs.expo.dev` (markdown endpoints), all fetched live during this 
 - ⚠️ Pinned `react-native-css@0.0.0-nightly.5ce6396` — current is `3.0.7`. Updated.
 - Universal styling per current docs = NativeWind / Uniwind external libs; standard Tailwind
   is web-only.
+
+## react-native-dev (MiniMax-AI/skills)
+
+- General-purpose RN/Expo engineering guide (SKILL.md + 10 references), scope = breadth, not
+  deployment.
+- ✅ Accurate: React 19 (`use()` ↦ `useContext`, `<Context>` provides) — confirmed, SDK 54+ and
+  current templates ship React 19.3.0; `expo-av` deprecated → `expo-audio`/`expo-video`;
+  `--template blank-typescript` still valid (58.0.32); `process.env.EXPO_OS`.
+- ⚠️ SDK table stopped at SDK 55 — extended to 58 with verified changelog facts
+  (56 = RN 0.85/React 19.2; 57 = RN 0.86; 58 = iOS 27, App Intents, SPM, New Arch default).
+- ⚠️ networking API-routes repeated the stale "Cloudflare Workers / no fs" frame — corrected
+  per our `expo-api-routes` (`node:fs` IS available in-memory; partial Node.js support).
+- ⚠️ NativeWind section was v4-only — clarified v4 (stable, tailwindcss v3) vs v5 rc
+  (tailwindcss v4 + react-native-css 3.0.7), pointing to `expo-tailwind-setup`.

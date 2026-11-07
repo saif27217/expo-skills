@@ -13,6 +13,7 @@ corrected where the upstream had drifted.
 | **expo-api-routes** | `skills/expo-api-routes/SKILL.md` | ✅ corrected — `node:fs` IS supported (in-memory); Cloudflare limits flagged as unverified |
 | **expo-dev-client** | `skills/expo-dev-client/SKILL.md` | ✅ verified accurate; version floor bumped |
 | **expo-tailwind-setup** | `skills/expo-tailwind-setup/SKILL.md` | ✅ corrected — modern NativeWind v5 rc + react-native-css 3.x (not old preview/nightly) |
+| **react-native-dev** | `skills/react-native-dev/` (SKILL.md + 10 references) | ✅ cross-verified 2026-11 — SDK table extended to 58; Cloudflare runtime framing corrected; NativeWind v4/v5 clarified |
 
 ## Verification
 
