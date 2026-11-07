@@ -20,14 +20,6 @@ manage app versions; and deploy web bundles/API routes via EAS Hosting.
 > The key fix: `resourceClass` uses **`default`, `medium`, or `large`** — NOT the stale
 > `m-medium` value found in the upstream mirror. Current EAS CLI is **27.5.0**.
 
-## References
-
-- `references/workflows.md` — CI/CD workflows, PR previews
-- `references/testflight.md` — iOS TestFlight beta submissions
-- `references/app-store-metadata.md` — App Store metadata / ASO
-- `references/play-store.md` — Google Play submissions
-- `references/ios-app-store.md` — iOS App Store submission
-
 Before cloud builds / submissions / deployments, confirm project, account, artifact,
 track/channel and cost. Pinning a reviewed CLI version is recommended for automation.
 
@@ -123,7 +115,6 @@ For authoring API routes, see `expo-api-routes`.
 ### iOS
 - `eas build -p ios --profile production --auto-submit` for quick TestFlight submissions
 - Configure Apple credentials: `eas credentials`
-- See `references/testflight.md` / `references/ios-app-store.md`
 
 ### Android
 - Google Play service account in `submit.production.android`
@@ -133,7 +124,6 @@ For authoring API routes, see `expo-api-routes`.
 - EAS Hosting gives preview URLs per PR; production uses your custom domain
 - Custom domain assignment is **dashboard-only** (Hosting settings, DNS verify → SSL →
   CNAME/A record; premium feature) — not `eas.json`
-- See `references/workflows.md` for CI/CD
 
 ## Version Management
 
