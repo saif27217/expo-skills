@@ -46,3 +46,5 @@ nativewind 5.0.0-rc.1 / 4.2.7 (stable), react-native-css 3.0.7.
 
 Our host-specific Expo workflow lives in the Hermes skill `mobile-app-dev`
 (devops category) — headless Linux scaffold → verify → serve → `eas update` to Expo Go.
+Mirrored in this repo at `skills/mobile-app-dev/` (one-way sync from
+`~/.hermes/skills/devops/mobile-app-dev` via its `scripts/sync-repos.sh`).
