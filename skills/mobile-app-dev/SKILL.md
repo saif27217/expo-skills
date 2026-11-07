@@ -44,6 +44,7 @@ Build on the host, run on the phone via Expo Go. Verify every stage by real exec
 - To prove the live bundle contains the UI: `npx expo export -p android`, then `strings dist/_expo/static/js/android/entry-*.hbc | grep "<UI string>"` — SDK 58 ships Hermes bytecode (`.hbc`), not plain JS, so direct grep fails; and re-fetching eascdn signed asset URLs returns 403 (signatures expire). Trust the local export strings + manifest group-ID grep, never asset downloads.
 - TS excludes test files from app build (`tsconfig` exclude); `node:test`/`node:assert` types resolve via package.json `types` field, not `@types/node` alone.
 - Dev server port conflict: old `expo start` process holds :8081; kill the pid (it's printed in CommandError) before relaunch.
+- Large spreadsheet→app data: ship as committed JSON (`src/data/x.json`) + generated TS constant module; extractor checkpoints per chunk to workspace + progress.json (resume-safe). In-app counts must use EXACT source enum spellings ('Schedule' not 'Scheduled') — verify rendered stats against source Counter() before deploy. RN-web UI is verifiable headlessly: `expo start --port` + browser fill/click + innerText checks.
 
 ## References
 - `references/commands.md` — exact verified command sequences incl. token handling
