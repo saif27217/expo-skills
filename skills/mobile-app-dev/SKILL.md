@@ -1,7 +1,7 @@
 ---
 name: mobile-app-dev
 description: Use when scaffolding or deploying Expo/React Native apps.
-version: 1.2.0
+version: 1.3.0
 author: sak
 license: MIT
 metadata:
@@ -46,6 +46,8 @@ Build on the host, run on the phone via Expo Go. Verify every stage by real exec
 - Dev server port conflict: old `expo start` process holds :8081; kill the pid (it's printed in CommandError) before relaunch.
 - Search-results bug 'only N matches text, no rows': TWO layers — (a) the search util's default `limit` (e.g. `searchTests(q, limit=15)`) silently truncates, so the count line always reads exactly 15; raise the cap and let the VIEW cap rows with 'showing first N · scroll for more'. (b) result rows rendered as TextInput siblings with `flex: 1` collapse to 0px once matches exceed viewport → wrap rows in a `ScrollView` sibling (ScrollView as SIBLING of TextInput is safe; only as its CHILD it crashes) with natural-height rows. Headless check: after typing a common query, count divs with `offsetHeight>15` containing badge text.
 - When a util's default param/cap changes, node:test assertions pinning the old value fail — update them in the same commit (`npm test` = `node --test --experimental-strip-types 'src/utils/*.test.ts'`).
+- Screen icons: `NativeTabs.Trigger.Label` takes plain strings only, so icons in the tab bar must be emoji prefixed to the label; mirror the same emoji in the screen header. `\u{...}` pictograph escapes are opaque in source — confirm the intended glyph by reading the rendered innerText before shipping (a wrong codepoint like U+1F3CB silently renders a weightlifter). Prefer emoji over `@expo/vector-icons` for anything shown in the tab bar or needing headless verification: emoji render from system fonts on both RN-web and Android, while vector-icons render as PUA glyphs a browser check cannot validate.
+- Overview/home screens: compute every displayed number at runtime from the SAME dataset constant the search uses (totals, per-category counts, distinct partner names via `new Set(...)`), never hardcode counts — the UI stays truthful when the dataset changes. Structure: title + subtitle with counts, flex-row stat cards, legend card explaining badge vocabulary with the actual partner names, one how-to hint line.
 - Large spreadsheet→app data: ship as committed JSON (`src/data/x.json`) + generated TS constant module; extractor checkpoints per chunk to workspace + progress.json (resume-safe). In-app counts must use EXACT source enum spellings ('Schedule' not 'Scheduled') — verify rendered stats against source Counter() before deploy. RN-web UI is verifiable headlessly: `expo start --port` + browser fill/click + innerText checks.
 
 ## References
