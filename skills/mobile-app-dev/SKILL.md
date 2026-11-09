@@ -32,7 +32,7 @@ Build on the host, run on the phone via Expo Go. Verify every stage by real exec
 - Never `git add -A` blindly: `dist*/` build outputs (dist_serve, dist/) get committed and bloat uploads; `.gitignore` them before the first `eas build`/`update`.
 - `expo publish` is dead in SDK ≥53; the only push is `eas update` (asset bundle channel).
 - Signed tour tunnels need login or `EXPO_TOKEN=... npx expo start --tunnel`; tunnels expire ~15 min idle — never quote them as permanent.
-- `npx eas` fails ("could not determine executable") until `eas-cli` is npm-installed.
+- `npx eas` fails ("could not determine executable") until `eas-cli` is npm-installed. With a project-local install, invoke `node_modules/.bin/eas` / `node_modules/.bin/expo` directly — do not hunt for them on PATH or under `~/.bin`; `timeout expo` and bare `expo` both miss.
 - eas-cli v27 eas.json top level allows only `{cli, build, submit}`; a top-level `"production"` profile is rejected (`"production" is not allowed`). Correct minimal setup: eas.json = `{"cli":{"version":">= 27.5.0"}}` then `eas update -p android --environment production --branch production -m "..." --non-interactive` (`--channel` is legacy, `--auto` takes git branch name).
 - EAS auth without login: `EXPO_TOKEN=... eas whoami` BEFORE any eas command; token exists only as live env, never persisted (see commands.md publish block).
 - eas-cli v27 `--platform` accepts ONE value from `android|ios|all` (`-p android,ios` and repeated `-p` both error). For both targets in one call use `-p all`.

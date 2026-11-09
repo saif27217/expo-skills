@@ -38,6 +38,9 @@ git commit -am "..."  # clean tree required; commit HEAD must contain the fix
 #    in files/memory/chat — the secrets-redaction policy replaces stored copies
 #    with a 3-char placeholder that fails "The bearer token is invalid"; the
 #    user must re-supply it each time it is needed.
+#    When the user PASTES a fresh token this turn, embed that exact literal
+#    (single-quoted) in the command — never re-type a previously-seen value
+#    (it may already be the redacted placeholder). `env -i` works fine.
 # 2. Verify auth WITHOUT echoing the token:
 EXPO_TOKEN=*** eas whoami   # expect "Accounts: • <acct> (Role: Developer)"
 # 3. (first time only) put project on EAS:
