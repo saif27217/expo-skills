@@ -46,11 +46,19 @@ EXPO_TOKEN=*** eas whoami   # expect "Accounts: • <acct> (Role: Developer)"
 # 3. (first time only) put project on EAS:
 EXPO_TOKEN=*** eas init --account drsaifbiochems-team --non-interactive
 #    -> prints project URL + project UUID; writes app.json owner/id
-# 4. Publish to channel (v27 form; --channel is rejected):
-EXPO_TOKEN=*** eas update -p android --environment production --branch production --message "..." --non-interactive
+# 4. Publish (v27 form; --channel is rejected; --environment is REQUIRED in
+#    non-interactive mode; a missing --branch name is auto-created):
+#    production channel:
+EXPO_TOKEN='paste-fresh-literal-here' node node_modules/.bin/eas update -p android --environment production --branch production --message "..." --non-interactive
+#    Expo Go channel (verified 2026-11-18 lab-app, created branch 'development'):
+EXPO_TOKEN='paste-fresh-literal-here' node node_modules/.bin/eas update -p android --branch development --environment development --message "..." --non-interactive
 # expo-cli warning "--non-interactive is not supported, use $CI=1" is harmless.
 # Report from output: Update group ID, Android update ID, runtime version,
-# Commit sha (MUST equal pushed HEAD sha), EAS Dashboard URL. Phone: the
+# Commit sha (MUST equal pushed HEAD sha), EAS Dashboard URL.
+# Prove the branch moved (token-allowed, cheap):
+EXPO_TOKEN='paste-fresh-literal-here' node node_modules/.bin/eas branch:list
+# expect: Branch production | Group ID == printed group | fresh timestamp.
+# env -i (with PATH/HOME re-exported) also works if shell env must be cleared. Phone: the
 # installed production build picks the group up on next launch; an Expo Go
 # session opened via dev-server URL is unaffected by eas updates.
 ```
