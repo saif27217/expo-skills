@@ -61,6 +61,18 @@ EXPO_TOKEN='paste-fresh-literal-here' node node_modules/.bin/eas branch:list
 # env -i (with PATH/HOME re-exported) also works if shell env must be cleared. Phone: the
 # installed production build picks the group up on next launch; an Expo Go
 # session opened via dev-server URL is unaffected by eas updates.
+# PITFALL: an eas update reaches ONLY clients tracking that branch. "Publish on
+#    a fresh branch" leaves every device untouched (nobody tracks the new name),
+#    so the user keeps seeing the old UI and reports the fix as "still there".
+#    Diagnose with `eas branch:list` (the branch with the recent timestamp is
+#    the one the client tracks: 'development' for Expo Go / dev-server installs,
+#    'production' for standalone builds) and republish the same HEAD there. Prove
+#    the move with `eas branch:view <branch>` head Message.
+# PITFALL: a rejected UI redesign can damage neighbouring paths. To revert one
+#    screen exactly: `git checkout <good-sha> -- src/app/<screen>.tsx`, then
+#    re-add any helper the newer data layer dropped (e.g. vendorFor removed from
+#    lab-search.ts) so the old imports still resolve. With bare `tsc --ignoreConfig`
+#    a clean screen reports ONLY TS2307 alias errors + TS7006 implicit-any cascade.
 ```
 Expo Go deep link: https://expo.dev/@drsaifbiochems-team/lab-app
 CDN verify (multipart manifest, not JSON):
